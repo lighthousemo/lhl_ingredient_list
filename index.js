@@ -3,9 +3,11 @@ var app = express();
 var bodyParser = require("body-parser");
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+app.set("view engine", "ejs");
 
 var database = {
   ingredients: [
@@ -21,6 +23,10 @@ var database = {
   ]
 }
 
+app.get("/", (req, res) => {
+  res.redirect("/recipes");
+});
+
 app.get("/recipes", (req, res) => {
   // prep data to send down to the template
   const recipeBox = database.recipes.map((recipe) => {
@@ -34,7 +40,12 @@ app.get("/recipes", (req, res) => {
 
 function getIngredient(id) {
   return database.ingredients.find((ingredient) => {
-    return ingredient.id === ingredientID;
+    return ingredient.id === id;
   }); // ex: {id: 1, name: "Apple Juice"}
 }
 
+
+const PORT = 8000;
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}!`);
+});

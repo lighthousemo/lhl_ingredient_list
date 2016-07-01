@@ -1,0 +1,18 @@
+<h1>Recipes</h1>
+
+<div class="page">
+  <ul>
+    <% recipeBox.forEach(function(recipe) { %>
+      <!--li><%= JSON.stringify(recipe) %></li-->
+      <li>
+        <h3><%= recipe.title %></h3>
+        <img style="height:100px; width: 100px;" src="<%= recipe.image_url %>" />
+        <ul>
+        <% recipe.ingredients.forEach(function(ingredient) { %>
+          <li><%= ingredient %></li>
+        <% }) %>
+        </ul>
+      </li>
+    <% }); %>
+  </ul>
+</div>
